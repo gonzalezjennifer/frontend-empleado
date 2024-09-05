@@ -28,6 +28,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/ui-components.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -41,23 +42,60 @@ export default {
     '@nuxtjs/vuetify'
   ],
 
+  router: {
+    middleware: ['auth']
+  },
+
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
+    '@nuxtjs/auth',
     '@nuxtjs/axios'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/'
+    baseURL: 'http://localhost:3010/api/empleado'
+  },
+  auth: {
+    redirect: {
+      login: '/',
+      logout: '/',
+      home: '/',
+      callback: '/'
+    },
+    localStorage: false,
+    resetOnError: true,
+    strategies: {
+      local: {
+        cookie: false,
+        user: {
+          property: 'user'
+        },
+        token: {
+          property: 'token',
+          required: true
+        },
+        endpoints: {
+          login: {
+            url: '/login',
+            method: 'post',
+            propertyName: 'token'
+          },
+          user: false
+        },
+        rewriteRedirects: true,
+        fullPathRedirect: true
+      }
+    }
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,
