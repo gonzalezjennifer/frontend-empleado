@@ -62,6 +62,7 @@ export default {
             message: 'Has iniciado sesion',
             icon: 'mdi-success'
           })
+          this.$router.push('/dashboard')
         }).catch((error) => {
           console.error('@@@ error => ', error)
         })

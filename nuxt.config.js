@@ -63,7 +63,7 @@ export default {
       login: '/',
       logout: '/',
       home: '/',
-      callback: '/'
+      callback: '/dashboard'
     },
     localStorage: false,
     resetOnError: true,
@@ -80,8 +80,7 @@ export default {
         endpoints: {
           login: {
             url: '/login',
-            method: 'post',
-            propertyName: 'token'
+            method: 'post'
           },
           user: false
         },
